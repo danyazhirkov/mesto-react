@@ -27,22 +27,20 @@ class Api {
         .then(res => {return this._getResponseData(res)})
     }
   
-    updateUserData(profileInputsData) {
+    updateUserData(userData) {
       return fetch(`${this._url}users/me`, {
         headers: this._headers,
         method: 'PATCH',
-        body: JSON.stringify({
-          name: profileInputsData.name,
-          about: profileInputsData.description })
+        body: JSON.stringify(userData)
       })
         .then(res => {return this._getResponseData(res)})
     }
   
-    sendingCard({ name, link }) {
+    sendingCard(userData) {
       return fetch(`${this._url}cards`, {
         headers: this._headers,
         method: 'POST',
-        body: JSON.stringify({name, link})
+        body: JSON.stringify(userData)
       })
         .then(res => {return this._getResponseData(res)})
     }
@@ -73,6 +71,10 @@ class Api {
       })
         .then(res => {return this._getResponseData(res)})
     }
+
+    changeLikeCardStatus(cardId, isLiked) {
+      return isLiked ? this.likeCard(cardId) : this.unlikeCard(cardId)
+    };
   
     unlikeCard(cardId) {
       return fetch(`${this._url}cards/${cardId}/likes`, {

@@ -1,31 +1,58 @@
-import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
-function Card(props) {
+function Card({ card, onCardClick, onCardDelete, onCardLike }) {
+    const currentUser = useContext(CurrentUserContext);
+
+    const isOwn = card.owner._id === currentUser._id;
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    const cardLikeButtonClassName = `element__button-heart ${
+        isLiked && "element__button-heart_theme-dark"
+    }`;
+
     function handleClick() {
-        props.onCardClick(props.card);
+        onCardClick(card);
+    }
+
+    function handleDeleteClick(e) {
+        e.stopPropagation();
+        onCardDelete(card);
+    }
+
+    function handleLikeClick() {
+        onCardLike(card);
     }
 
     return (
         <div className="element">
             <img
-                src={props.link}
+                src={card.link}
                 className="element__photo"
-                alt={props.alt}
+                alt={card.name}
                 onClick={handleClick}
             />
-            <button type="button" className="element__button-trash"></button>
+            {isOwn && (
+                <button
+                    type="button"
+                    className="element__button-trash"
+                    onClick={handleDeleteClick}
+                />
+            )}
             <div className="element__description">
-                <h2 className="element__name">{props.name}</h2>
+                <h2 className="element__name">{card.name}</h2>
                 <div className="element__likes-stuff">
                     <button
                         type="button"
-                        className="element__button-heart"
+                        className={cardLikeButtonClassName}
+                        onClick={handleLikeClick}
                     ></button>
-                    <div className="element__like-counter">{props.likes}</div>
+                    <div className="element__like-counter">
+                        {card.likes.length}
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
-
 export default Card;
