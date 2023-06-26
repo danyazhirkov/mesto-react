@@ -112,48 +112,46 @@ function App() {
 
     return (
         <div className="page__container">
-            <>
-                <CurrentUserContext.Provider value={currentUser}>
-                    <Header />
-                    <Main
-                        cards={cards}
-                        onCardLike={handleCardLike}
-                        onEditProfile={handleEditProfileClick}
-                        onAddPlace={handleAddCardClick}
-                        onEditAvatar={handleEditAvatarClick}
-                        onCardClick={handleCardClick}
-                        onCardDelete={handleConfirmDeleteClick}
-                    />
-                    <Footer />
-                    <EditAvatarPopup
-                        isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                        onUpdateAvatar={handleUpdateAvatar}
-                    />
-                    <EditProfilePopup
-                        isOpen={isEditProfilePopupOpen}
-                        onClose={closeAllPopups}
-                        onUpdateUser={handleUpdateUser}
-                    />
-                    <AddPlacePopup
-                        isOpen={isAddPlacePopupOpen}
-                        onClose={closeAllPopups}
-                        onAddPlace={handleAppPlaceSubmit}
-                    />
-                    <ImagePopup
-                        id="popup_image"
-                        card={selectedCard}
-                        isOpen={isImagePopupOpen}
-                        onClose={closeAllPopups}
-                    />
-                    <DeletePlacePopup
-                        isOpen={isConfirmPopupOpen}
-                        onClose={closeAllPopups}
-                        onCardDelete={handleDeleteCard}
-                        card={deletePlace}
-                    />
-                </CurrentUserContext.Provider>
-            </>
+            <CurrentUserContext.Provider value={currentUser}>
+                <Header />
+                <Main
+                    cards={cards}
+                    onCardLike={handleCardLike}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddCardClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardDelete={handleConfirmDeleteClick}
+                />
+                <Footer />
+                <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateAvatar={handleUpdateAvatar}
+                />
+                <EditProfilePopup
+                    isOpen={isEditProfilePopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateUser={handleUpdateUser}
+                />
+                <AddPlacePopup
+                    isOpen={isAddPlacePopupOpen}
+                    onClose={closeAllPopups}
+                    onAddPlace={handleAppPlaceSubmit}
+                />
+                <ImagePopup
+                    id="popup_image"
+                    card={selectedCard}
+                    isOpen={isImagePopupOpen}
+                    onClose={closeAllPopups}
+                />
+                <DeletePlacePopup
+                    isOpen={isConfirmPopupOpen}
+                    onClose={closeAllPopups}
+                    onCardDelete={handleDeleteCard}
+                    card={deletePlace}
+                />
+            </CurrentUserContext.Provider>
         </div>
     );
 }
