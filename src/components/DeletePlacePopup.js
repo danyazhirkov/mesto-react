@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 
-function DeletePlacePopup({ card, isOpen, onClose, onCardDelete }) {
+function DeletePlacePopup({ card, isOpen, onClose, onCardDelete, isLoading }) {
     function handleSubmit(e) {
         e.preventDefault();
         onCardDelete(card);
@@ -9,10 +9,10 @@ function DeletePlacePopup({ card, isOpen, onClose, onCardDelete }) {
         <PopupWithForm
             name="confirm"
             title="Вы уверены?"
-            titleButton="Да"
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
+            buttonText={isLoading ? "Сохранение..." : "Да"}
         ></PopupWithForm>
     );
 }
